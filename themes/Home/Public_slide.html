@@ -1,0 +1,23 @@
+    <!-- bxslider -->
+    <div class="flash">
+        <ul class="bxslider">
+            <php>
+                $slide = getSlide(1);
+            </php>
+            <volist name="slide" id="r">
+                <li>
+                    <a href="{$r['link']}">
+                        <img src="{$r['pic']}" alt="{$r['title']}" />
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $('.bxslider').bxSlider({
+            adaptiveHeight: true,
+            infiniteLoop: true,
+            hideControlOnEnd: true,
+            auto: true
+        });
+    </script>

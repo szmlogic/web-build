@@ -1,0 +1,114 @@
+<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+    <form name="myform" id="myform" action="{:U('Page/add')}" method="post">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">基本内容</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label"><font color="red">*</font>标题</label>
+                            <input type="text" class="form-control" name="title" id="title" value="{$vo['title']}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">内容</label>
+                            <div style="display:none;" id="content_aid_box"></div>
+                            <textarea name="content" id="content" boxid="content" style="width: 99%; height: 300px; visibility: hidden; display: none;">{$vo['content']}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <?php
+                    $attach['moduleid'] = $r['moduleid'];
+                    $attach['file_size'] = '1MB';
+                    $attach['file_limit'] = 1;
+                    $attach['file_types'] = '*.jpeg;*.jpg;*.png;*.gif';
+                    $attach['isthumb'] = 0;
+                    $attach['isadmin'] = 1;
+                    $yzh_auth_key = sysmd5(C('ADMIN_ACCESS').$_SERVER['HTTP_USER_AGENT']);
+                    $temp_str = authcode(json_encode($attach), 'ENCODE', $yzh_auth_key);
+                    $yzh_auth = urlencode($temp_str);
+
+                    ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">缩略图</div>
+                    <div class="panel-body">
+                        <div class="thumb_box" id="thumb_box">
+                            <div id="thumb_aid_box"></div>
+                            <a class="uploadimg" href="javascript:swfupload('thumb_uploadfile','thumb','{$yzh_auth}',yesdo);">
+                                <img src="<empty name='vo.thumb'>__PUBLIC__/images/upload_thumb.png<else/>{$vo['thumb']}</empty>" id="thumb_pic" width="135" height="113">
+                            </a>
+                            <input type="button" value="取消缩略图" onclick="javascript:clean_thumb('thumb');" class="btn btn-xs btn-primary" />
+                            <input type="hidden" id="thumb" name="thumb" value="{$vo['thumb']}" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="hidden" name="id" value="{$Think.get.id}">
+            <input type="hidden" name="forward" value="{$_SERVER['HTTP_REFERER']}" />
+            <input type="submit" value="提交" class="btn btn-primary" >
+            <input type="reset" value="取消" class="btn btn-primary">
+        </div>
+    </form>
+    </div>
+    </div>
+    <script type="text/javascript" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+    <script type="text/javascript">
+        KindEditor.ready(function(K) {
+            K.create('#content', {
+                cssPath : '/Public/static/kindeditor/plugins/code/prettify.css',
+                fileManagerJson:'/index.php?g=Admin&m=Attachment&a=index&isadmin=1&more=1&isthumb=0&file_limit=20&file_types=jpg,jpeg,gif,png,doc,docx,rar,zip,swf&file_size=5&moduleid=1&auth=03665ip6E4YS7tgbxBytG3St0OYqJCJ+YYCEjMD8l0SEmHSncP0syRnWN6zyS1IOujglPW8GFwo882jnFjMQZVkRMUo+I0J5wmrTAltR0w&l=zh-cn',
+                editorid:'content',
+                upImgUrl:'/index.php?g=Admin&m=Attachment&a=index&isadmin=1&more=1&isthumb=0&file_limit=1&file_types=gif,jpg,jpeg,png,bmp&file_size=5&moduleid=1&auth=14caN5eAor2hNmI46GNASXi5wT+r7qytNH1DwLikZyUdxu4PFjSXbHqnDNNnIPdRsV6penfzRTmLhbVnQQ&l=zh-cn',
+                upFlashUrl:'/index.php?g=Admin&m=Attachment&a=index&isadmin=1&more=1&isthumb=0&file_limit=1&file_types=swf,flv&file_size=5&moduleid=1&auth=211ekeme5vPfm/xBs2vG2Wf78Wa058QEEDoSKvlFtbcfCvrYrD4weTUwonFc2cyG&l=zh-cn',
+                upMediaUrl:'/index.php?g=Admin&m=Attachment&a=index&isadmin=1&more=1&isthumb=0&file_limit=1&file_types=mpg,wmv,avi,wma,mp3,mid,asf,rm,rmvb,wav,wma,mp4&file_size=5&moduleid=1&auth=c55e5KSDQ++y/l9TdkJ681dz4/uSBALNN28De1TsVdDPR6ft8+4Drnqe1LzADJNU9eeO7zGqF/UrosP3lTE1ruI5su3g+yQe5iFueMzAmSpB2ekI+8M2uQ&l=zh-cn',
+                allowFileManager : true,
+                filterMode: false,
+                hunqinglineTag:'br',
+                afterBlur: function () { this.sync(); }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+/*
+        $(document).ready(function() {
+            $('#myform').ajaxForm({
+                success:  complete,  // post-submit callback
+                dataType: 'json'
+            });
+        });
+*/
+
+        function complete(data){
+            if(data.status==1){
+                art.dialog({
+                    icon: 'succeed',
+                    time: 2,
+                    content: data.info,
+                    close: function() {
+                        window.location.href = "{:U('Page/index')}";
+                        return true;
+                    }
+                });
+            }else{
+                art.dialog({
+                    icon: 'error',
+                    time: 2,
+                    content: data.info,
+                });
+            }
+        }
+    </script>
+</block>

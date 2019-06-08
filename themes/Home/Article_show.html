@@ -1,0 +1,71 @@
+<include file="Public:head" />
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- right -->
+            <div class="col-xs-12 col-sm-8 col-md-9" style="float:right">
+                <div class="list_box">
+                    <h2 class="left_h2">
+                        {$catname}
+                    </h2>
+                    <div class="contents">
+                        <h1 class="contents_title">
+                            {$article.title}
+                        </h1>
+                        <if condition="$article.content">
+                            {$article.content}
+                            <else/>
+                            {$catname}
+                        </if>
+                    </div>
+                    <div class="point">
+                        <span class="to_prev col-xs-12 col-sm-6 col-md-6">
+                            <if condition="$prea">
+                                上一篇：
+                                <a href="{$prea.url}" title="{$prea.title}">
+                                    {$prea.title}
+                                </a>
+                                <else/>
+                                <span>
+                                    上一篇:无
+                                </span>
+                            </if>
+                        </span>
+                        <span class="to_next col-xs-12 col-sm-6 col-md-6">
+                            <if condition="$next">
+                                下一篇：
+                                <a href="{$next.url}">
+                                    {$next.title}
+                                </a>
+                                <else/>
+                                <span>
+                                    下一篇:无
+                                </span>
+                            </if>
+                        </span>
+                    </div>
+                </div>
+                <div class="list_related">
+                    <h1 class="left_h2">
+                        相关新闻
+                    </h1>
+                    <ul class="list_news related_news">
+                        <Gr:list catid="catid" field="id,title,createtime,url" limit="12">
+                            <li>
+                                <a href="{$r.url}" title="{$r.title}">
+                                    {$r.title}
+                                </a>
+                                <span class="news_time">
+                                    {$r.createtime|toDate=###,'Y-m-d'}
+                                </span>
+                            </li>
+                        </Gr:list>
+                    </ul>
+                </div>
+            </div>
+            <!-- left -->
+            <include file="Public:left" />
+        </div>
+    </div>
+    <include file="Public:foot" />
+</body>

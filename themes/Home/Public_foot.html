@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default navbar-fixed-bottom footer_nav">
+    <div class="foot_nav btn-group dropup">
+        <a class="dropdown-toggle" href="/">
+            <span class="glyphicon glyphicon-share btn-lg" aria-hidden="true"></span>
+            首页
+        </a>
+    </div>
+    <div class="foot_nav">
+        <a href="tel:{$site_phone}">
+            <span class="glyphicon glyphicon-phone btn-lg" aria-hidden="true">
+            </span>
+            手机
+        </a>
+    </div>
+<div class="foot_nav" aria-hidden="true" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="glyphicon glyphicon-th-list btn-lg"></span>分类</div>
+    <div class="foot_nav">
+        <a id="gototop" href="#">
+            <span class="glyphicon glyphicon-circle-arrow-up btn-lg" aria-hidden="true">
+            </span>
+            顶部
+        </a>
+    </div>
+</nav>
+<footer>
+    <div class="copyright">
+        <p>
+            CopyRight {$site_copyright}&nbsp;{$site_approve}
+        </p>
+        <p class="copyright_p">
+            地址：{$site_address} &nbsp;电话:{$site_telephone} &nbsp;
+        </p>
+    </div>
+    {:W('Kefu')}
+</footer>
+<link rel="stylesheet" type="text/css" href="__CSS__/chat.css" />
+<script>
+    $('#kefu .kefuClose').click(function() {
+        $('#kefu .kefuLeft').animate({
+            width: '30px'
+        },
+        500);
+        $('#kefu .kefuRight').animate({
+            width: 0
+        },
+        100);
+    });
+    $('.kefuLeft').click(function() {
+        $(this).animate({
+            width: 0
+        },
+        100);
+        $('.kefuRight').animate({
+            width: '154px'
+        },
+        100);
+    });
+</script>
+<script src="__JS__/main.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+var winHeight=200;
+var timer=null;
+function show(){
+    document.getElementById("popWin").style.display="block"; 
+    timer=setInterval("lift(5)",2);
+} 
+function hid(){
+        timer=setInterval("lift(-5)",2);
+} 
+function lift(n) { 
+    var w=document.getElementById("popWin"); 
+    var h=parseInt(w.style.height||w.currentStyle.height);
+    if (h<winHeight && n>0 || h>1 && n<0){
+        w.style.height=(h+n).toString()+"px"; 
+    } 
+    else
+        {
+        w.style.display=(n>0?"block":"none");
+                clearInterval(timer);
+    } 
+} 
+window.onload=function(){ 
+        setTimeout("show()",1000);
+} 
+</script>
+<!--访问统计-->
+<script>
+    window.onload = function()
+    {
+        $.ajax({
+            url:"{:U('Api/Hitstall/index')}",
+        });
+    }
+</script>
+</html>

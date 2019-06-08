@@ -1,0 +1,93 @@
+<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+<div>
+
+    <form id="myform" class="form-horizontal" method="post" action="{:U('Block/add')}">
+        <div class="form-group">
+            <label class="control-label col-md-2">碎片名称:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="name" id="name" value="{$vo.name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">碎片类型:</label>
+            <div class="col-md-8">
+            <div class="radio-inline">
+                <label>
+                <input type="radio" name="type" value="url" checked="">链接地址
+                </label>
+            </div>
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" name="type" value="img">图片
+                </label>
+            </div>
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" name="type" value="text">文本
+                </label>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">内容:</label>
+            <div class="col-md-8">
+                {: $Form->editor(array('field'=>'content','modelid'=>'-1','setup'=>array('toolbar'=>'full','flashupload'=>'1')))}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">所属组:</label>
+            <div class="col-md-4">
+                <select name="group" class="form-control">
+                    <option value="1">pc端</option>
+                    <option value="2">wap端</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" value="提交" class="btn btn-primary"/>
+            <a class="btn btn-primary" href="javascript:window.history.go(-1);">返回</a>
+        </div>
+    </form>
+
+</div>
+</block>
+    <block name="script">
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#myform').ajaxForm({
+                    success:  complete,  // post-submit callback
+                    dataType: 'json'
+                });
+            });
+
+            function complete(data){
+                if (data.status == 1) {
+
+                    layer.confirm(data.info, {
+                        icon:1,
+                        btn: ['继续添加','返回列表'] //按钮
+                    }, function(){
+                        window.location.href = "{:U('Block/add')}";
+                        return false;
+                    }, function(){
+                        window.location.href = "{$Think.cookie.__forward__}";
+                        return true;
+                    });
+
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                }
+
+            }
+
+        </script>
+    </block>

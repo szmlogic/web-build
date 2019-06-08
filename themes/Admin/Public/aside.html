@@ -1,0 +1,20 @@
+<div id="aside" class="scrollerbar">
+    <div class="navbar">
+        <ul class="asidenav">
+            <volist name="side_menu_list" id="r">
+                <li><a><i class="fa fa-folder-open-o"></i><span>{$r['name']}</span></a>
+                    <ul>
+                        <volist name="r._child" id="rr">
+                            <li>
+                                <a href="{:U($rr['group'].'/'.$rr['model'].'/'.$rr['action'],$rr['data'])}">
+                                    <i class="{$rr['icon']}"></i><span>{$rr['name']}</span>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+    <div class="table-toolbar">
+        <a href="{:U('Slide/index')}" class="btn btn-sm btn-primary"><i class="fa fa-reply"></i>返回广告列表</a>
+        <a href="{:U('Slide/addpic?fid='.$slide[id])}" class="btn btn-sm btn-primary">添加图片</a>
+        <a class="btn btn-sm btn-primary" onclick="myform.action='{:U('Slide/listorder')}';$('#myform').submit();">排序</a>
+    </div>
+
+    <form name="myform" id="myform" action="" method="post">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="48">{:L('listorder')}</th>
+                    <th align="left">{:L(THUMB)}&nbsp;&nbsp;</th>
+                    <th width="140" class="center">{:L('manage')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="list" id="vo" key="k">
+                <tr>
+                    <td width="40" class='center'><input name='listorders[{$vo.id}]' type='text' size='3' value='{$vo.listorder}' class='input-text-c'></td>
+                    <td align="left"><img src="{$vo['pic']}" onload="if(this.width >= 320){this.width = 320}"></td>
+                    <td class="center">
+                        <a class="btn btn-xs btn-primary" href="{:U('slide/editpic',array(fid=>$fid,id=>$vo['id']))}">编辑</a>
+                        <a class="btn btn-xs btn-danger" href="javascript:confirm_delete('{:U('slide/deletepic',array(id=>$vo['id']))}')">删除</a>
+                    </td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+    </form>
+    <div id="pages">{$page}</div>
+
+</block>

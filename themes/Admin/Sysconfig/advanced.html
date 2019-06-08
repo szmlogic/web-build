@@ -1,0 +1,191 @@
+<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">高级设置</div>
+    <div class="panel-body">
+        <form id="myform" class="form-horizontal" method='post' action="{:U('Sysconfig/save')}">
+            <div class="form-group">
+                <label class="control-label col-md-2">列表分页数:</label>
+                <div class="col-md-5">
+                    <input name="PAGE_LISTROWS" type="text" class="form-control" value="{$PAGE_LISTROWS}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">URL访问模式:</label>
+                <div class="col-md-6">
+                    {:Form::select(array('field'=>'URL_MODEL','options'=>$urlmodelarr,'setup'=>array('onchange'=>'urlrule(this.value)')),$URL_MODEL)}
+                </div>
+            </div>
+
+            <div class="form-group" id="urlrule">
+                <label class="control-label col-md-2">URL规则:</label>
+                <div class="col-md-7">
+                    {:Form::select(array('field'=>'URL_URLRULE','options'=>$Urlrule),$URL_URLRULE)}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">参数分割符:</label>
+                <div class="col-md-2">
+                    <input name="URL_PATHINFO_DEPR" type="text" class="form-control" value="{$URL_PATHINFO_DEPR}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">URL伪静态后缀:</label>
+                <div class="col-md-2">
+                    <input name="URL_HTML_SUFFIX" type="text" class="form-control" value="{$URL_HTML_SUFFIX}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">布局模板:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'LAYOUT_ON','options'=>$openarr),$LAYOUT_ON)}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">令牌验证:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'TOKEN_ON','options'=>$openarr),$TOKEN_ON)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">令牌表单字段:</label>
+                <div class="col-md-2">
+                    <input name="TOKEN_NAME" type="text" class="form-control" value="{$TOKEN_NAME}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">模板编译缓存:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'TMPL_CACHE_ON','options'=>$openarr),$TMPL_CACHE_ON)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">模板缓存有效期:</label>
+                <div class="col-md-2">
+                    <input name="TMPL_CACHE_TIME" type="text" class="form-control" value="{$TMPL_CACHE_TIME}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">开启页面Trace显示界面</label>
+                <div class="col-xs-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="SHOW_PAGE_TRACE" value="1" <eq name="SHOW_PAGE_TRACE" value="1">checked="checked"</eq> />启用
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="SHOW_PAGE_TRACE" value="0" <eq name="SHOW_PAGE_TRACE" value="0">checked="checked"</eq> />禁用
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">运行时间显示</label>
+                <div class="col-xs-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="SHOW_RUN_TIME" value="1" <eq name="SHOW_RUN_TIME" value="1">checked="checked"</eq> />启用
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="SHOW_RUN_TIME" value="0" <eq name="SHOW_RUN_TIME" value="0">checked="checked"</eq> />禁用
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">静态缓存:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'HTML_CACHE_ON','options'=>$openarr),$HTML_CACHE_ON)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">缓存有效期:</label>
+                <div class="col-md-2">
+                    <input name="HTML_CACHE_TIME" type="text" class="form-control" value="{$HTML_CACHE_TIME}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">缓存读取方式:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'HTML_READ_TYPE','options'=>$readtypearr),$HTML_READ_TYPE)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">静态文件后缀:</label>
+                <div class="col-md-2">
+                    <input name="HTML_FILE_SUFFIX" type="text" class="form-control" value="{$HTML_FILE_SUFFIX}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">ADMIN_ACCESS:</label>
+                <div class="col-md-5">
+                    <input name="ADMIN_ACCESS" type="text" class="form-control" value="{$ADMIN_ACCESS}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">首页生成html:</label>
+                <div class="col-md-2">
+                    {:Form::select(array('field'=>'HOME_ISHTML','options'=>$openarr),$HOME_ISHTML)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Cookie路径:</label>
+                <div class="col-md-5">
+                    <input name="COOKIE_PATH" type="text" class="form-control" value="{$COOKIE_PATH}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Cookie有效域名:</label>
+                <div class="col-md-5">
+                    <input name="COOKIE_DOMAIN" type="text" class="form-control" value="{$COOKIE_DOMAIN}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">默认语言:</label>
+                <div class="col-md-2">
+                    <input name="DEFAULT_LANG" type="text" class="form-control" value="{$DEFAULT_LANG}">
+                </div>
+            </div>
+            <div class="form-actions">
+                <INPUT TYPE="submit"  value="保存" class="btn btn-sm btn-primary" >
+                <input TYPE="reset"  value="重置" class="btn btn-sm btn-primary">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#myform').ajaxForm({
+            success:  complete,  // post-submit callback
+            dataType: 'json'
+        });
+    });
+
+    function complete(data){
+        if(data.status==1){
+            layer.msg('保存成功');
+        }else{
+            layer.msg(data.info);
+        }
+    }
+
+    function urlrule(m){
+
+        if(m==1 || m==2){
+            $('#urlrule').show();
+        }else{
+            $('#urlrule').hide();
+        }
+    }
+    urlrule({$URL_MODEL});
+</script>
+
+</block>

@@ -1,0 +1,128 @@
+<include file="Public:head" />
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- right -->
+            <div class="col-xs-12 col-sm-8 col-md-9" style="float:right">
+                <div class="list_box">
+                    <h2 class="left_h2">
+                        {$catname}
+                    </h2>
+                    <div class="feedback">
+                        <form id="feedback_form" name="form" action="{:U('form/insert')}" method="post"
+                        class="form-horizontal">
+                            <input name="formid" value="1" type="hidden">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-3 control-label">
+                                    留言标题：
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="title" class="form-control" id="title" placeholder="必填">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="col-sm-3 control-label">
+                                    您的姓名：
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="username" class="form-control" id="username"
+                                    placeholder="必填">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tel" class="col-sm-3 control-label">
+                                    联系电话：
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="tel" class="form-control" id="mobile" placeholder="必填">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-3 control-label">
+                                    电子邮箱：
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="email" name="email" class="form-control" id="inputEmail">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="col-sm-3 control-label">
+                                    联系地址：
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="address" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content" class="col-sm-3 control-label">
+                                    留言内容：
+                                </label>
+                                <div class="col-sm-6">
+                                    <textarea name="content" class="form-control" rows="3" id="content">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="verifyCode" class="col-xs-12 col-sm-3 control-label">
+                                    验证码：
+                                </label>
+                                <div class="col-xs-7 col-sm-2">
+                                    <input type="text" name="verifyCode" class="form-control" id="verifyCode"
+                                    placeholder="验证码">
+                                </div>
+                                <div class="col-xs-2 col-sm-1">
+                                    <img id="verifyImage" class="checkcode reloadverify" align="absmiddle"
+                                    title="Click the refresh verification code" onclick="javascript:resetVerifyCode(this);"
+                                    src="/index.php?m=index&a=verify">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:30px;">
+                                <div class="col-sm-offset-3 col-sm-10">
+                                    <button type="submit" name="button" value="Send" class="btn btn-danger page-btn">
+                                        提交留言
+                                    </button>
+                                    &nbsp;
+                                    <button type="reset" name="reset" class="btn btn-default grey-btn">
+                                        重新填写
+                                    </button>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                form_submit('feedback_form');
+                            </script>
+                            <script type="text/javascript" src="__STATIC__/layer/layer.js">
+                            </script>
+                            <script type="text/javascript">
+                                $("#feedback_form").submit(function() {
+                                    var self = $(this);
+                                    $.post(self.attr("action"), self.serialize(), success, "json");
+                                    return false;
+
+                                    function success(data) {
+                                        if (data.status == 1) {
+                                            layer.msg(data.info, {
+                                                icon: 1,
+                                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                            },
+                                            function() {
+                                                $('#feedback_form')[0].reset();
+                                            });
+                                        } else {
+                                            layer.msg(data.info, {
+                                                icon: 2,
+                                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                            });
+                                            $(".reloadverify").click();
+                                        }
+                                    }
+                                });
+                            </script>
+                    </div>
+                </div>
+            </div>
+            <!-- left -->
+            <include file="Public:left" />
+        </div>
+    </div>
+    <include file="Public:foot" />
+</body>

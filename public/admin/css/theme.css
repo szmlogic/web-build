@@ -1,0 +1,15 @@
+
+/*头部导航样式*/
+#header {
+    background-color: #2772ee;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    min-height: 0 !important;
+    height: 54px;
+    overflow: visible;
+    z-index: 101;
+}
+#header a{
+    color: #d7e5f8;
+}

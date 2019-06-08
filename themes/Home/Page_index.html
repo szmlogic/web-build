@@ -1,0 +1,28 @@
+<include file="Public:head" />
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- right -->
+            <div class="col-xs-12 col-sm-8 col-md-9" style="float:right">
+                <div class="list_box">
+                    <h2 class="left_h2">
+                        {$catname}
+                    </h2>
+                    <div class="contents">
+                        <notempty name="content">
+                            {$content}
+                            <else/>
+                            {$catname}
+                        </notempty>
+                        <div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- left -->
+            <include file="Public:left" />
+        </div>
+    </div>
+    <include file="Public:foot" />
+</body>

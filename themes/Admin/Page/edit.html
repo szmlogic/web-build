@@ -1,0 +1,75 @@
+<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+<form name="myform" id="myform" action="{:U('Page/edit')}" method="post">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">基本内容</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label"><font color="red">*</font>标题</label>
+                        <input type="text" class="form-control" name="title" id="title" value="{$vo['title']}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">内容</label>
+                        {:W('Kindeditor',array('name'=>'content','value'=>$vo['content']))}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">缩略图</div>
+                <div class="panel-body">
+                    <div class="thumb_box" id="thumb_box">
+                        <div id="thumb_aid_box"></div>
+                        <a class="thumbnail uploadimg" href="javascript:swfupload('thumb','{:get_yzh_auth(1,'200kb',1)}',yesdo);">
+                            <img src="<empty name='vo.thumb'>__IMG__/upload_thumb.png<else/>{$vo['thumb']}</empty>" id="thumb_pic" width="135" height="113">
+                        </a>
+                        <input type="button" value="取消缩略图" onclick="javascript:clean_thumb('thumb');" class="btn btn-xs btn-primary" />
+                        <input type="hidden" id="thumb" name="thumb" value="{$vo['thumb']}" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-actions">
+        <input type="hidden" name="id" value="{$Think.get.id}">
+        <input type="submit" value="提交" class="btn btn-sm btn-primary" >
+        <button class="btn btn-default return" onclick="javascript:history.back(-1);return false;">返回</button>
+    </div>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#myform').ajaxForm({
+        success:  complete,  // post-submit callback
+        dataType: 'json'
+    });
+});
+
+function complete(data){
+    if (data.status == 1) {
+        layer.msg(data.info, {
+            icon: 1,
+            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+        }, function(){
+            window.location.href = "{$Think.cookie.__forward__}";
+            return true;
+        });
+    } else {
+        layer.msg(data.info, {
+            icon: 2,
+            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+        });
+    }
+}
+</script>
+</block>

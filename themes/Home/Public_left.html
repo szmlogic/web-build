@@ -1,0 +1,64 @@
+<div class="col-xs-12 col-sm-4 col-md-3">
+    <div class="left_nav" id="categories">
+        <h1 class="left_h2">
+            {$max_parent_catname}
+        </h1>
+        <ul class="left_nav_ul" id="firstpane">
+            <Gr:cat catid="max_parent_catid" id="r">
+                <li>
+                    <a class="biglink" href="{$r.url}">
+                        {$r.catname}
+                    </a>
+                    <span class="menu_head">
+                        +
+                    </span>
+                    <ul class="left_snav_ul menu_body">
+                        <Gr:cat catid="$r['id']" id="rr">
+                            <li>
+                                <a href="{$rr.url}">
+                                    {$rr.catname}
+                                </a>
+                            </li>
+                        </Gr:cat>
+                    </ul>
+                </li>
+            </Gr:cat>
+        </ul>
+    </div>
+    <div class="left_news">
+        <h1 class="left_h2">
+            新闻中心
+        </h1>
+        <ul class="left_news">
+            <gr:list catid="5" field="thumb,title,url,createtime" id="r" posid="1"
+            limit="5">
+                <li>
+                    <a href="{$r.url}" title="{$r.title}">
+                        {$r.title|str_cut=###,28}
+                    </a>
+                </li>
+            </gr:list>
+        </ul>
+    </div>
+    <div class="index_contact">
+        <h2 class="left_h2">
+            联系我们
+        </h2>
+        <p style="padding-top:8px;">
+            联系人：{$site_lxr}
+        </p>
+        <p>
+            手机：{$site_phone}
+        </p>
+        <p>
+            电话：{$site_telephone}
+        </p>
+        <p>
+            邮箱：{$site_email}
+        </p>
+        <p>
+            地址：{$site_address}
+            </a>
+        </p>
+    </div>
+</div>

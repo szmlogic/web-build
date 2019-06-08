@@ -1,0 +1,106 @@
+<include file="Public:head" />
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- right -->
+            <div class="col-xs-12 col-sm-8 col-md-9" style="float:right">
+                <div class="list_box">
+                    <h2 class="left_h2">
+                        {$catname}
+                    </h2>
+                    <!-- showpic -->
+                    <div class="col-sm-11 col-md-8 col-md-offset-2" style="margin-bottom:30px; margin-top:20px;">
+                        <ul class="showpic_flash">
+                            <li>
+                                <a class="example-image-link" href="{$picture.thumb}" data-lightbox="example-set"
+                                target="_blank">
+                                    <img class="example-image" src="{$picture.thumb}" alt="{$r[filename]}"
+                                    />
+                                </a>
+                            </li>
+                            <volist name="picture.pics" id="r">
+                                <if condition="!empty($r[filepath])">
+                                    <li>
+                                        <a class="example-image-link" href="{$r[filepath]}" data-lightbox="example-set"
+                                        target="_blank">
+                                            <img class="example-image" src="{$r[filepath]}" alt="{$r[filename]}" />
+                                        </a>
+                                    </li>
+                                </if>
+                            </volist>
+                        </ul>
+                        <div id="pic-page">
+                            <a data-slide-index="0" href="{$picture.thumb}">
+                                <img src="{$picture.thumb}" alt="{$r[filename]}" />
+                            </a>
+                            <volist name="picture.pics" id="r">
+                                <if condition="!empty($r[filepath])">
+                                    <a data-slide-index="{$i}" href="{$r[filepath]}">
+                                        <img src="{$r[filepath]}" alt="{$r[filename]}" />
+                                    </a>
+                                </if>
+                            </volist>
+                        </div>
+                    </div>
+                    <div class="product_con">
+                        <if condition="$picture.content">
+                            {$picture.content}
+                            </else>
+                            {$catname}
+                        </if>
+                    </div>
+                    <div class="point">
+                        <span class="to_prev col-xs-12 col-sm-6 col-md-6">
+                            <if condition="$prea">
+                                上一篇：
+                                <a href="{$prea.url}" title="{$prea.title}">
+                                    {$prea.title}
+                                </a>
+                                <else/>
+                                <span>
+                                    上一篇:无
+                                </span>
+                            </if>
+                        </span>
+                        <span class="to_next col-xs-12 col-sm-6 col-md-6">
+                            <if condition="$next">
+                                下一篇：
+                                <a href="{$next.url}">
+                                    {$next.title}
+                                </a>
+                                <else/>
+                                <span>
+                                    下一篇:无
+                                </span>
+                            </if>
+                        </span>
+                    </div>
+                </div>
+                <div class="list_related">
+                    <h1 class="left_h2">
+                        相关图片
+                    </h1>
+                    <div class="product_list related_list">
+                        <gr:list catid="catid" field="title,url,thumb" limit="4" id="r">
+                            <div class="col-sm-4 col-md-3 col-mm-6 product_img">
+                                <a href="{$r.url}">
+                                    <img src="{$r.thumb}" class="opacity_img" alt="{$r.title}" />
+                                </a>
+                                <p class="product_title">
+                                    <a href="{$r.url}" title="{$r.title}">
+                                        {$r.title}
+                                    </a>
+                                </p>
+                            </div>
+                        </gr:list>
+                    </div>
+                </div>
+            </div>
+            <!-- left -->
+            <include file="Public:left" />
+        </div>
+    </div>
+    <include file="Public:foot" />
+</body>
+
+</html>

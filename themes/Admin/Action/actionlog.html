@@ -1,0 +1,50 @@
+<extend name="Public/base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{:U('Action/clear')}" class="btn btn-primary">清空日记</a>
+        </div>
+    </div>
+</div>
+
+    <!-- 数据列表 -->
+    <div class="data-table with-padding">
+        <table class="table table-bordered table-striped ">
+            <thead>
+            <tr>
+                <th class="">执行者</th>
+                <th class="">日志内容</th>
+                <th class="">执行时间</th>
+                <th class="">Ip</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td><a href="{:U('Action/actionlog',array('uid'=>$vo['user_id']))}">{:get_nickname($vo['user_id'])}</a></td>
+                        <td>{$vo['remark']}</td>
+                        <td><span>{$vo.create_time|time_format}</span></td>
+
+                        <td>{$vo['action_ip']|long2ip}</td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="7" class="text-center"> {:L("暂无数据")} </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="with-padding">{$_page}</div>
+    <!-- /分页-->
+</block>
+

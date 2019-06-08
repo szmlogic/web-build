@@ -1,0 +1,21 @@
+/* 在线客服样式 */
+
+.kefuBox{position:fixed;z-index:1000;top:180px;right:0;width:auto; _position:absolute;_top: expression(documentElement.scrollTop +45);}
+.kefuBox .kefuLeft{float:left;overflow:hidden;width:30px;height: 157px;cursor:pointer;background:url(../images/kefu/kefu_l.png) no-repeat}
+.kefuBox .kefuRight{display:block;float:left;overflow:hidden;width:0;}
+.kefuBox .kefuTop{width:154px;height:36px;background:url(../images/kefu/kefu_top.png) no-repeat;}
+.kefuBox .kefuClose{float:right;overflow:hidden;width:154px; height:36px;display:block;cursor:pointer;}
+.kefuBox .kefuBottom{width:154px;height:12px;background:url(../images/kefu/kefu_bottom.png) no-repeat;}
+.kefuBox .kefuCont{width:154px;padding:0 12px;background:url(../images/kefu/kefu_line.png) repeat-y;overflow:hidden;}
+.kefuBox .kefuCont ul{margin:0;padding:0;}
+.kefuBox .kefuCont ul li{width:130px;line-height:28px;overflow:hidden;height:28px;padding-left:40px;padding-right:10px;text-overflow:ellipsis;white-space:nowrap;margin-bottom:5px;}
+.kefuBox .kefuCont ul li a{color:#333;}
+.kefuBox .kefuCont ul li.pic{width:130px;height:89px;margin-bottom:10px;padding:0;}
+.kefuBox .kefuCont ul li.qq{background:url(../images/kefu/qq.png) no-repeat;}
+.kefuBox .kefuCont ul li.wang{background:url(../images/kefu/wangwang.png) no-repeat}
+.kefuBox .kefuCont ul li.spk{background:url(../images/kefu/skype.png) no-repeat}
+.kefuBox .kefuCont ul li.tel{background:url(../images/kefu/tel.png) no-repeat}
+.kefuBox .kefuCont ul li.codeer{display:block;width:130px;height: 165px;text-align:center;color:#fff;padding:10px 0 0;font-family:"微软雅黑";font-size:14px;margin-bottom:0;}
+.kefuBox .kefuCont ul li.codeer p{display:block;height:35px;line-height:35px;}
+.kefuBox .kefuCont ul li.codeer span{display:block;width:116px;height:116px;padding:7px;background:url(../images/kefu/cobj.png) no-repeat;}
+.kefuBox .kefuCont ul li.codeer span img{width:116px;height:100px;}

@@ -1,0 +1,133 @@
+<extend name="Public:base"/>
+
+<!--侧边导航-->
+<block name="aside">
+    <include file="Public:aside"/>
+</block>
+
+<block name="main">
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">邮箱发送配置（用于网站发送邮件）</div>
+            <div class="panel-body">
+                <form class="myform form-horizontal" method='post' action="{:U('Sysconfig/save')}">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">邮件服务器</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="mail_server" value="{$sysconf['mail_server']}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">邮件发送端口</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" name="mail_port" value="{$sysconf.mail_port}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">发件人地址</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="mail_from" value="{$sysconf.mail_from}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">AUTH LOGIN验证</label>
+                        <div class="col-md-7">
+                            <input name="mail_auth" value="1" type="radio" <if condition="$sysconf.mail_auth == 1">  checked</if>> 开启
+                            <input name="mail_auth" value="0" type="radio" <if condition="$sysconf.mail_auth == 0">  checked</if> > 关闭
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">验证用户名</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="mail_user" value="{$sysconf.mail_user}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">验证密码</label>
+                        <div class="col-md-7" id="mail_password">
+                            <php>if(!empty($sysconf['mail_password'])){</php>
+                            <p class="form-control-static" style="width: 100px;float:left;">*********</p>
+                            <button type="button" onclick="changepwd()" class="btn btn-xs btn-primary" style="float:left;">修改</button>
+                            <php>}else{</php>
+                            <input type="password" class="form-control" name="mail_password" value=""/>
+                            <php>}</php>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">邮件设置测试</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="mail_to" id="mail_to" value=""/>
+                            <input type="button" class="btn btn-sm btn-primary" onClick="javascript:test_mail();" value="测试发送">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="保存" class="btn btn-sm btn-primary">
+                        <input type="reset" value="重置" class="btn btn-sm btn-primary">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">邮箱接收配置（用于接收邮件）</div>
+            <div class="panel-body">
+                <form class="myform form-horizontal" method='post' action="{:U('Sysconfig/save')}">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">邮箱地址</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="mail_accept" id="mail_server" value="{$sysconf['mail_accept']}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="保存" class="btn btn-sm btn-primary">
+                        <input type="reset" value="重置" class="btn btn-sm btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+function changepwd(){
+    var html = '<input type="password" class="form-control" name="mail_password" value=""/>';
+    $('#mail_password').html(html);
+}
+function test_mail(){
+    $.ajax({
+        url:'{:U("Sysconfig/testmail")}&mail_to='+$('#mail_to').val(),
+        beforeSend:function(){
+            layer.msg('正在发送邮件');
+        },
+        success:function(data){
+            layer.msg(data.info);
+        }
+    });
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.myform').ajaxForm({
+        success:  complete,  // post-submit callback
+        dataType: 'json'
+    });
+});
+
+function complete(data){
+    if(data.status==1){
+        layer.msg('修改成功');
+    }else{
+        layer.msg(data.info);
+    }
+}
+</script>
+</block>

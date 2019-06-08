@@ -1,0 +1,28 @@
+<div id="aside">
+    <div class="navbar">
+        <ul class="asidenav">
+            <li><a><i class="fa fa-folder-open-o"></i><span>快捷操作</span></a>
+                <ul>
+                    <volist name="shortcuts" id="r">
+                        <li>
+                            <a href="{$r.url}">
+                                <i class="fa fa-mail-forward"></i><span>{$r.name}</span>
+                            </a>
+                        </li>
+                    </volist>
+
+                    <if condition="$Think.session.admin.id eq 1">
+                        <li>
+                            <a href="{:U('Index/shortcuts')}">
+                                <i class="fa fa-eye"></i>
+                                <span>快捷操作管理</span>
+                            </a>
+                        </li>
+                    </if>
+
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>

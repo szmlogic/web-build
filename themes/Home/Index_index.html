@@ -1,0 +1,144 @@
+<include file="Public:head" />
+<body>
+    <div class="about_bg" style="background-image: url({$site_aboutpic})">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <p class="about_p">
+                        About us
+                    </p>
+                    <h2 class="about_h2">
+                        公 司 简 介
+                    </h2>
+                    <p class="about_line">
+                    </p>
+                    <div class="col-xs-12 col-sm-12 col-md-5">
+                        <img src="{$site_about}" class="about_img" alt="公司简介">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7">
+                        <p class="about_contents">
+                            {$block[20]}
+                        </p>
+                        <a href="{$Cats[17][url]}" class="about_more">
+                            了解更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product_bg" style="background-image: url({$site_productpic})">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="index_product">
+                        <p class="about_p">
+                            Product
+                        </p>
+                        <h2 class="about_h2">
+                            产品展示
+                        </h2>
+                        <p class="about_line">
+                        </p>
+                        <div class="product_list">
+                            <Gr:list catid="7" filed="url, title, thumb" limit="8" posid="1">
+                                <div class="col-sm-4 col-md-3 col-mm-6 product_img">
+                                    <a href="{$r.url}">
+                                        <img src="{$r.thumb}" class="opacity_img" alt="{$r.title}">
+                                    </a>
+                                    <p class="product_title">
+                                        <a href="{$r.url}" title="{$r.title}">
+                                            {$r.title|str_cut=###,15}
+                                        </a>
+                                    </p>
+                                </div>
+                            </Gr:list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="news_box">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <p class="about_p">
+                        NEWS
+                    </p>
+                    <h2 class="about_h2">
+                        新闻中心
+                    </h2>
+                    <p class="about_line">
+                    </p>
+                    <Gr:list catid="5" filed="url, title,createtime,description" limit="4"
+                    posid="1">
+                        <div class="col-sm-4 col-md-3 col-mm-6 index_news">
+                            <span>
+                                {$r.createtime|todate=###,'Y-m'}
+                            </span>
+                            <h3>
+                                <a href="{$r.url}" title="{$r.title}">
+                                    {$r.title}
+                                </a>
+                            </h3>
+                            <p>
+                                {$r.description}
+                            </p>
+                            <a href="{$r.url}" class="new_btn">
+                                详细&gt;&gt;
+                            </a>
+                        </div>
+                    </Gr:list>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="index_case">
+                    <p class="about_p">
+                        Cases
+                    </p>
+                    <h2 class="about_h2">
+                        施工案例
+                    </h2>
+                    <p class="about_line">
+                    </p>
+                    <div class="product_list">
+                        <Gr:list catid="19" filed="url,title,thumb,description" limit="4" posid="1">
+                            <div class="col-sm-4 col-md-3 col-mm-6 product_img">
+                                <a href="{$r.url}">
+                                    <img src="{$r.thumb}" class="opacity_img" alt="{$r.title}">
+                                </a>
+                                <p class="product_title">
+                                    <a href="{$r.url}">
+                                        {$r.title}
+                                    </a>
+                                </p>
+                            </div>
+                        </Gr:list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="link_box">
+        <div class="container">
+            <span class="link_title">
+                友情链接
+            </span>
+            <button id="link_btn" class="glyphicon glyphicon-plus" aria-hidden="true">
+            </button>
+            <span class="link_list">
+                <Gr:link typeid="0" linktype="1" key="i" limit="20">
+                    <a href="{$r.siteurl}" target="_blank">
+                        {$r.name}
+                    </a>
+                </Gr:link>
+            </span>
+        </div>
+    </div>
+    <include file="Public:foot" />
+</body>
