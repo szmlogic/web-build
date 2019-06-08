@@ -1,9 +1,9 @@
 <?php  return array (
   'DB_TYPE' => 'mysql',
-  'DB_HOST' => 'rdsdicuat6xnnk5vxwjxupublic.mysql.rds.aliyuncs.com',
-  'DB_NAME' => 'qymbjzt32',
-  'DB_USER' => 'qymbjzt32',
-  'DB_PWD' => 'Lgl211123',
+  'DB_HOST' => 'localhost',
+  'DB_NAME' => 'k27',
+  'DB_USER' => 'root',
+  'DB_PWD' => '',
   'DB_PORT' => '3306',
   'DB_PREFIX' => 'qy_',
 );?>
