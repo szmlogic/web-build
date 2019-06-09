@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><div class="kefuBox" id="kefu">
+<?php if (!defined('THINK_PATH')) exit();?><!-- <div class="kefuBox" id="kefu">
     <div class="kefuLeft">
     </div>
     <div class="kefuRight">
@@ -25,7 +25,7 @@
         <div class="kefuBottom">
         </div>
     </div>
-</div>
+</div> -->
 <script>
     $('#kefu .kefuClose').click(function() {
         $('#kefu .kefuLeft').animate({

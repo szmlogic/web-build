@@ -71,7 +71,7 @@
                         <img src="<?php echo ($site_logo); ?>" class="logo" alt="<?php echo ($site_name); ?>">
                     </a>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-3 tel_box">
+                <!-- <div class="col-xs-12 col-sm-3 col-md-3 tel_box">
                     <div class="top_tel">
                         <img src="/themes/Home/Public/images/tel.jpg" alt="服务热线">
                     </div>
@@ -83,7 +83,7 @@
                             <?php echo ($site_telephone); ?>
                         </p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- Fixed navbar -->
@@ -213,7 +213,7 @@
                         </p>
                         <div class="product_list">
                             <?php
- $_result=M("Product")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1512357328 AND status=1  AND catid in(7,14,53,15,16) AND posid like '%-1-%'")->order("id desc")->limit("8")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
+ $_result=M("Product")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1560083891 AND status=1  AND catid in(7,14,53,15,16) AND posid like '%-1-%'")->order("id desc")->limit("8")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
                                     <a href="<?php echo ($r["url"]); ?>">
                                         <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>">
                                     </a>
@@ -243,7 +243,7 @@
                     <p class="about_line">
                     </p>
                     <?php
- $_result=M("Article")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1512357328 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 index_news">
+ $_result=M("Article")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1560083891 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 index_news">
                             <span>
                                 <?php echo (todate($r["createtime"],'Y-m')); ?>
                             </span>
@@ -278,7 +278,7 @@
                     </p>
                     <div class="product_list">
                         <?php
- $_result=M("Picture")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1512357328 AND status=1  AND catid=19 AND posid like '%-1-%'")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
+ $_result=M("Picture")->field("id,catid,url,title,title_style,keywords,description,thumb,createtime")->where("createtime<=1560083891 AND status=1  AND catid=19 AND posid like '%-1-%'")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
                                 <a href="<?php echo ($r["url"]); ?>">
                                     <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>">
                                 </a>

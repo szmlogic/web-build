@@ -179,13 +179,77 @@
                     <h2 class="left_h2">
                         <?php echo ($catname); ?>
                     </h2>
-                    <div class="contents">
-                        <?php if(!empty($content)): echo ($content); ?>
-                            <?php else: ?>
-                            <?php echo ($catname); endif; ?>
-                        <div>
-                            <br />
+                    <!-- showpic -->
+                    <div class="col-sm-11 col-md-8 col-md-offset-2" style="margin-bottom:30px; margin-top:20px;">
+                        <ul class="showpic_flash">
+                            <li>
+                                <a class="example-image-link" href="<?php echo ($picture["thumb"]); ?>" data-lightbox="example-set"
+                                target="_blank">
+                                    <img class="example-image" src="<?php echo ($picture["thumb"]); ?>" alt="<?php echo ($r[filename]); ?>"
+                                    />
+                                </a>
+                            </li>
+                            <?php if(is_array($picture["pics"])): $i = 0; $__LIST__ = $picture["pics"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i; if(!empty($r[filepath])): ?><li>
+                                        <a class="example-image-link" href="<?php echo ($r[filepath]); ?>" data-lightbox="example-set"
+                                        target="_blank">
+                                            <img class="example-image" src="<?php echo ($r[filepath]); ?>" alt="<?php echo ($r[filename]); ?>" />
+                                        </a>
+                                    </li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+                        </ul>
+                        <div id="pic-page">
+                            <a data-slide-index="0" href="<?php echo ($picture["thumb"]); ?>">
+                                <img src="<?php echo ($picture["thumb"]); ?>" alt="<?php echo ($r[filename]); ?>" />
+                            </a>
+                            <?php if(is_array($picture["pics"])): $i = 0; $__LIST__ = $picture["pics"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i; if(!empty($r[filepath])): ?><a data-slide-index="<?php echo ($i); ?>" href="<?php echo ($r[filepath]); ?>">
+                                        <img src="<?php echo ($r[filepath]); ?>" alt="<?php echo ($r[filename]); ?>" />
+                                    </a><?php endif; endforeach; endif; else: echo "" ;endif; ?>
                         </div>
+                    </div>
+                    <div class="product_con">
+                        <?php if($picture.content): echo ($picture["content"]); ?>
+                            </else>
+                            <?php echo ($catname); endif; ?>
+                    </div>
+                    <div class="point">
+                        <span class="to_prev col-xs-12 col-sm-6 col-md-6">
+                            <?php if($prea): ?>上一篇：
+                                <a href="<?php echo ($prea["url"]); ?>" title="<?php echo ($prea["title"]); ?>">
+                                    <?php echo ($prea["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    上一篇:无
+                                </span><?php endif; ?>
+                        </span>
+                        <span class="to_next col-xs-12 col-sm-6 col-md-6">
+                            <?php if($next): ?>下一篇：
+                                <a href="<?php echo ($next["url"]); ?>">
+                                    <?php echo ($next["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    下一篇:无
+                                </span><?php endif; ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="list_related">
+                    <h1 class="left_h2">
+                        相关图片
+                    </h1>
+                    <div class="product_list related_list">
+                        <?php
+ $_result=M("Picture")->field("title,url,thumb")->where("createtime<=1560084581 AND status=1  AND catid=19")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
+                                <a href="<?php echo ($r["url"]); ?>">
+                                    <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>" />
+                                </a>
+                                <p class="product_title">
+                                    <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
+                                        <?php echo ($r["title"]); ?>
+                                    </a>
+                                </p>
+                            </div><?php
+ } } ?>
                     </div>
                 </div>
             </div>
@@ -197,7 +261,7 @@
         </h1>
         <ul class="left_nav_ul" id="firstpane">
             <?php
- $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(54)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(54)==$r["parentid"]) { ++$n; ?><li>
+ $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(4)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(4)==$r["parentid"]) { ++$n; ?><li>
                     <a class="biglink" href="<?php echo ($r["url"]); ?>">
                         <?php echo ($r["catname"]); ?>
                     </a>
@@ -223,7 +287,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084147 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084581 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>
@@ -351,3 +415,5 @@ window.onload=function(){
 </script>
 </html>
 </body>
+
+</html>

@@ -180,13 +180,59 @@
                         <?php echo ($catname); ?>
                     </h2>
                     <div class="contents">
-                        <?php if(!empty($content)): echo ($content); ?>
+                        <h1 class="contents_title">
+                            <?php echo ($download["title"]); ?>
+                        </h1>
+                        <?php if($download.content): echo ($download["content"]); ?>
                             <?php else: ?>
                             <?php echo ($catname); endif; ?>
-                        <div>
-                            <br />
-                        </div>
+                        </br>
+                        <p class="download_btn">
+                            <a href="<?php echo ($download["filepath"]); ?>" class="btn btn-primary" role="button" target="_blank">
+                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                &nbsp;点击下载
+                            </a>
+                        </p>
                     </div>
+                    <div class="point">
+                        <span class="to_prev col-xs-12 col-sm-6 col-md-6">
+                            <?php if($prea): ?>上一篇：
+                                <a href="<?php echo ($prea["url"]); ?>" title="<?php echo ($prea["title"]); ?>">
+                                    <?php echo ($prea["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    上一篇:无
+                                </span><?php endif; ?>
+                        </span>
+                        <span class="to_next col-xs-12 col-sm-6 col-md-6">
+                            <?php if($next): ?>下一篇：
+                                <a href="<?php echo ($next["url"]); ?>">
+                                    <?php echo ($next["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    下一篇:无
+                                </span><?php endif; ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="list_related">
+                    <h1 class="left_h2">
+                        相关下载
+                    </h1>
+                    <ul class="list_news related_news">
+                        <?php
+ $_result=M("Download")->field("id,title,createtime,url")->where("createtime<=1560084624 AND status=1  AND catid=60")->order("id desc")->limit("12")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+                                <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
+                                    <?php echo ($r["title"]); ?>
+                                </a>
+                                <span class="news_time">
+                                    <?php echo (todate($r["createtime"],'Y-m-d')); ?>
+                                </span>
+                            </li><?php
+ } } ?>
+                    </ul>
                 </div>
             </div>
             <!-- left -->
@@ -197,7 +243,7 @@
         </h1>
         <ul class="left_nav_ul" id="firstpane">
             <?php
- $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(54)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(54)==$r["parentid"]) { ++$n; ?><li>
+ $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(21)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(21)==$r["parentid"]) { ++$n; ?><li>
                     <a class="biglink" href="<?php echo ($r["url"]); ?>">
                         <?php echo ($r["catname"]); ?>
                     </a>
@@ -223,7 +269,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084147 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084624 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>

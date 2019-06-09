@@ -179,13 +179,22 @@
                     <h2 class="left_h2">
                         <?php echo ($catname); ?>
                     </h2>
-                    <div class="contents">
-                        <?php if(!empty($content)): echo ($content); ?>
+                    <div class="product_list product_list2">
+                        <?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i;?><div class="col-sm-4 col-md-4 col-mm-6 product_img">
+                                    <a href="<?php echo ($r["url"]); ?>">
+                                        <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>" />
+                                    </a>
+                                    <p class="product_title">
+                                        <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
+                                            <?php echo (str_cut($r["title"],20)); ?>
+                                        </a>
+                                    </p>
+                                </div><?php endforeach; endif; else: echo "" ;endif; ?>
                             <?php else: ?>
                             <?php echo ($catname); endif; ?>
-                        <div>
-                            <br />
-                        </div>
+                    </div>
+                    <div class="page">
+                        <?php echo ($pages); ?>
                     </div>
                 </div>
             </div>
@@ -197,7 +206,7 @@
         </h1>
         <ul class="left_nav_ul" id="firstpane">
             <?php
- $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(54)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(54)==$r["parentid"]) { ++$n; ?><li>
+ $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(4)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(4)==$r["parentid"]) { ++$n; ?><li>
                     <a class="biglink" href="<?php echo ($r["url"]); ?>">
                         <?php echo ($r["catname"]); ?>
                     </a>
@@ -223,7 +232,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084147 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084137 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>
@@ -351,3 +360,5 @@ window.onload=function(){
 </script>
 </html>
 </body>
+
+</html>
