@@ -46,13 +46,13 @@
             <div class="container">
                 <div class="col-xs-12 col-sm-9 col-md-9">
                     <span class="top_name">
-                        欢迎光临~<?php echo ($site_name); ?>
+                        Welcome~<?php echo ($site_name); ?>
                     </span>
                 </div>
                 <div id="topsearch" class="col-xs-12 col-sm-3 col-md-3">
                     <form id="searchform" action="/?m=search" method="post">
                         <div class="input-group search_group">
-                            <input type="text" name="keyword" class="form-control input-sm" value="请输入您要搜索的关键词"
+                            <input type="text" name="keyword" class="form-control input-sm" value="Please enter keywords"
                             onFocus="this.value=''" onBlur="if(!value){value=defaultValue;}">
                             <span class="input-group-btn">
                                 <span id="submit_search" onclick="searchform.submit();" title="产品搜索" class="glyphicon glyphicon-search btn-lg"
@@ -112,7 +112,7 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="/">
-                                网站首页
+                                Home
                             </a>
                         </li>
                         <?php
@@ -228,7 +228,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084494 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560262672 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>

@@ -179,23 +179,53 @@
                     <h2 class="left_h2">
                         <?php echo ($catname); ?>
                     </h2>
-                    <div class="product_list product_list2">
-                        <?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i;?><div class="col-sm-4 col-md-4 col-mm-6 product_img">
-                                    <a href="<?php echo ($r["url"]); ?>">
-                                        <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>" />
-                                    </a>
-                                    <p class="product_title">
-                                        <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
-                                            <?php echo ($r["title"]); ?>
-                                        </a>
-                                    </p>
-                                </div><?php endforeach; endif; else: echo "" ;endif; ?>
+                    <div class="contents">
+                        <h1 class="contents_title">
+                            <?php echo ($article["title"]); ?>
+                        </h1>
+                        <?php if($article.content): echo ($article["content"]); ?>
                             <?php else: ?>
                             <?php echo ($catname); endif; ?>
                     </div>
-                    <div class="page">
-                        <?php echo ($pages); ?>
+                    <div class="point">
+                        <span class="to_prev col-xs-12 col-sm-6 col-md-6">
+                            <?php if($prea): ?>上一篇：
+                                <a href="<?php echo ($prea["url"]); ?>" title="<?php echo ($prea["title"]); ?>">
+                                    <?php echo ($prea["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    上一篇:无
+                                </span><?php endif; ?>
+                        </span>
+                        <span class="to_next col-xs-12 col-sm-6 col-md-6">
+                            <?php if($next): ?>下一篇：
+                                <a href="<?php echo ($next["url"]); ?>">
+                                    <?php echo ($next["title"]); ?>
+                                </a>
+                                <?php else: ?>
+                                <span>
+                                    下一篇:无
+                                </span><?php endif; ?>
+                        </span>
                     </div>
+                </div>
+                <div class="list_related">
+                    <h1 class="left_h2">
+                        相关新闻
+                    </h1>
+                    <ul class="list_news related_news">
+                        <?php
+ $_result=M("Article")->field("id,title,createtime,url")->where("createtime<=1560263549 AND status=1  AND catid=13")->order("id desc")->limit("12")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+                                <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
+                                    <?php echo ($r["title"]); ?>
+                                </a>
+                                <span class="news_time">
+                                    <?php echo (todate($r["createtime"],'Y-m-d')); ?>
+                                </span>
+                            </li><?php
+ } } ?>
+                    </ul>
                 </div>
             </div>
             <!-- left -->
@@ -206,7 +236,7 @@
         </h1>
         <ul class="left_nav_ul" id="firstpane">
             <?php
- $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(7)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(7)==$r["parentid"]) { ++$n; ?><li>
+ $count=0; foreach ($Cats as $keyy=>$vy) { if($vy["ismenu"]==1 && intval(5)==$vy["parentid"]) { $count++; } } $n=0; foreach ($Cats as $key=>$r) { if( $r['ismenu']==1 && intval(5)==$r["parentid"]) { ++$n; ?><li>
                     <a class="biglink" href="<?php echo ($r["url"]); ?>">
                         <?php echo ($r["catname"]); ?>
                     </a>
@@ -232,7 +262,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560261510 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560263549 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>
@@ -360,5 +390,3 @@ window.onload=function(){
 </script>
 </html>
 </body>
-
-</html>
