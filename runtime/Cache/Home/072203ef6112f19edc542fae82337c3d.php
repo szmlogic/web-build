@@ -46,7 +46,7 @@
             <div class="container">
                 <div class="col-xs-12 col-sm-9 col-md-9">
                     <span class="top_name">
-                    Welcome~<?php echo ($site_name); ?>
+                        Welcome~<?php echo ($site_name); ?>
                     </span>
                 </div>
                 <div id="topsearch" class="col-xs-12 col-sm-3 col-md-3">
@@ -273,7 +273,7 @@
                     </h1>
                     <div class="product_list related_list">
                         <?php
- $_result=M("Product")->field("title,url,thumb")->where("createtime<=1560262528 AND status=1  AND catid=16")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
+ $_result=M("Product")->field("title,url,thumb")->where("createtime<=1560344053 AND status=1  AND catid=53")->order("id desc")->limit("4")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><div class="col-sm-4 col-md-3 col-mm-6 product_img">
                                 <a href="<?php echo ($r["url"]); ?>">
                                     <img src="<?php echo ($r["thumb"]); ?>" class="opacity_img" alt="<?php echo ($r["title"]); ?>" />
                                 </a>
@@ -321,7 +321,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560262528 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560344053 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>

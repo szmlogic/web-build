@@ -223,7 +223,7 @@
                     </h1>
                     <ul class="list_news related_news">
                         <?php
- $_result=M("Download")->field("id,title,createtime,url")->where("createtime<=1560084624 AND status=1  AND catid=60")->order("id desc")->limit("12")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Download")->field("id,title,createtime,url")->where("createtime<=1560345014 AND status=1  AND catid=60")->order("id desc")->limit("12")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                                 <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                                     <?php echo ($r["title"]); ?>
                                 </a>
@@ -269,7 +269,7 @@
         </h1>
         <ul class="left_news">
             <?php
- $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560084624 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
+ $_result=M("Article")->field("thumb,title,url,createtime")->where("createtime<=1560345014 AND status=1  AND catid in(5,11,52,12,13) AND posid like '%-1-%'")->order("id desc")->limit("5")->select(); if ($_result) { $i=0; $total = count($_result); foreach($_result as $key=>$r) { ++$i; $mod = ($i % 2 ); ?><li>
                     <a href="<?php echo ($r["url"]); ?>" title="<?php echo ($r["title"]); ?>">
                         <?php echo (str_cut($r["title"],28)); ?>
                     </a>
