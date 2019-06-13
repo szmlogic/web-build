@@ -10,7 +10,6 @@ ul{list-style:none;}
 .flash img{ width: 100%}
 .flash ul.bxslider{list-style:none;}
 .flash div.bx-pager{bottom: 4%;}
-.flash div.bx-controls-direction{ display:none; }
 .page_bg{height: 230px; margin-bottom: 10px;}
 .main{ padding:30px 0px 10px 0px;}
 .img-thumbnail{transition : opacity 0.7s;}
